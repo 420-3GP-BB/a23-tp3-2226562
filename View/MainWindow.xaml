@@ -10,7 +10,158 @@
         Width="1280"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    
+    <DockPanel Background="LightPink">
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-    </Grid>
+            <Grid Grid.Column="0" Margin="10">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="320"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Nom de l'utilisateur:"
+                           FontSize="30"
+                           FontWeight="Bold"/>
+                <TextBlock  Grid.Column="1"
+                            Text="Bonemine"
+                            FontSize="30"/>
+            </Grid>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
+                <Button x:Name="ChangerUser" 
+                        Content="Changer d'utilisateur"
+                        Width="120"
+                        Height="20"
+                        Command=""
+                        Margin="0,0,20,0"
+                        Background="Beige"/>
+                <Button x:Name="ModeAdmin" 
+                        Content="Mode administrateur" 
+                        Command=""
+                        Width="120"
+                        Height="20"
+                        Margin="0,0,20,0"
+                        Background="Beige"/>
+                <Button x:Name="Quitter" 
+                        Content="Quitter" 
+                        Width="120"
+                        Height="20"
+                        Click="Quitter_Click"
+                        Background="Beige"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderBrush="Black"
+                        BorderThickness="2" Margin="15"
+                    Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="Livres de l'utilisateur"
+                               HorizontalAlignment="Center"
+                               FontSize="25"
+                               FontWeight="Bold"/>
+                    <ListBox Grid.Row="1" Margin="6" Background="Bisque"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" 
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Center">
+                        <Button x:Name="CommanderLivre" 
+                                Content="Commander livre" 
+                                Width="120"
+                                Height="20"
+                                Command=""
+                                Background="Beige"
+                                Margin="0,0,70,0"/>
+                        <Button x:Name="Transferer" 
+                                Content="Transférer livre" 
+                                Width="120"
+                                Height="20"
+                                Command=""
+                                Margin="70,0,0,0"
+                                Background="Beige"
+                                />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border BorderBrush="Black"
+                            BorderThickness="2" Margin="0,15,10,5"
+                            Grid.Row="0">
+                    <Grid Margin="0,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="35"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                               Text="Commandes en attente"
+                                               HorizontalAlignment="Center"
+                                               FontSize="25"
+                                               FontWeight="Bold"
+                                               />
+                        <ListBox Grid.Row="1" 
+                                             Margin="6" 
+                                             Background="Bisque"/>
+                        <Button Grid.Row="2" 
+                                Content="Annuler la commande"
+                                x:Name="AnnulerCommande"
+                                Width="120"
+                                Height="20"
+                                Command=""
+                                VerticalAlignment="Top"
+                                Background="Beige"/>
+
+                    </Grid>
+                </Border>
+
+                <Border BorderBrush="Black"
+                            BorderThickness="2" Margin="0,5,10,15"
+                            Grid.Row="1">
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                               Text="Commandes traitées"
+                                               HorizontalAlignment="Center"
+                                               FontSize="25"
+                                               FontWeight="Bold"/>
+                        <ListBox Grid.Row="1" 
+                                             Margin="6" 
+                                             Background="Bisque"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </DockPanel>
 </Window>
