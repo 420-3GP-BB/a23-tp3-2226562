@@ -1,0 +1,123 @@
+<bibliotheque dernierUtilisateur="Achille Talon">
+  <membres>
+    <membre nom="Achille Talon" administrateur="True">
+      <livre ISBN-13="9781484224021" />
+      <livre ISBN-13="9781449358457" />
+      <livre ISBN-13="9780131177055" />
+      <commande statut="Attente" ISBN-13="9781492056355" />
+    </membre>
+    <membre nom="Astérix" administrateur="False">
+      <livre ISBN-13="9780131177055" />
+      <commande statut="Attente" ISBN-13="9781098121952" />
+    </membre>
+    <membre nom="Capitaine Haddock" administrateur="False">
+      <livre ISBN-13="9781484224021" />
+      <livre ISBN-13="9780136042594" />
+	  <commande statut="Attente" ISBN-13="9781098121952" />
+	</membre>
+    <membre nom="Mafalda" administrateur="False">
+      <livre ISBN-13="9781466598645" />
+      <livre ISBN-13="9781783555130" />
+    </membre>
+    <membre nom="Obélix" administrateur="False">
+      <livre ISBN-13="9780470497029" />
+      <livre ISBN-13="9781491958704" />
+    </membre>
+    <membre nom="Bonemine" administrateur="False">
+	  <livre ISBN-13="9780470497029" />
+      <commande statut="Attente" ISBN-13="9780321940155" />
+	  <commande statut="Traitee" ISBN-13="9781491957660" />
+	</membre>
+    <membre nom="Tintin" administrateur="False">
+      <livre ISBN-13="9781783555130" />
+	  <livre ISBN-13="9780596517335" />
+	  <commande statut="Attente" ISBN-13="9780262013192" />
+	</membre>
+  </membres>
+  <livres>
+    <livre ISBN-13="9781484224021">
+      <titre>Low-Level Programming</titre>
+      <auteur>Igor Zhirkov</auteur>
+      <editeur>APress</editeur>
+      <annee>2017</annee>
+    </livre>
+    <livre ISBN-13="9780596517335">
+      <titre>Maven The Definitive Guide</titre>
+      <auteur>Sonatype</auteur>
+      <editeur>O'Reilly</editeur>
+      <annee>2008</annee>
+    </livre>
+    <livre ISBN-13="9781491957660">
+      <titre>Python for Data Analysis</titre>
+      <auteur>Wes McKinney</auteur>
+      <editeur>O'Reilly</editeur>
+      <annee>2018</annee>
+    </livre>
+    <livre ISBN-13="9780136042594">
+      <titre>Artificial Intelligence A Modern Approach 3rd ed.</titre>
+      <auteur>Stuart Russel</auteur>
+      <editeur>Prentice Hall</editeur>
+      <annee>2010</annee>
+    </livre>
+    <livre ISBN-13="9780131177055">
+      <titre>Working Effectively with Legacy Code</titre>
+      <auteur>Michael C. Feathers</auteur>
+      <editeur>Prentice Hall</editeur>
+      <annee>2005</annee>
+    </livre>
+    <livre ISBN-13="9781449358457">
+      <titre>Java Performance The Definitive Guide</titre>
+      <auteur>Scott Oaks</auteur>
+      <editeur>O'Reilly</editeur>
+      <annee>2014</annee>
+    </livre>
+    <livre ISBN-13="9781466598645">
+      <titre>The Art of Game Design</titre>
+      <auteur>Jesse Schell</auteur>
+      <editeur>CRC Press</editeur>
+      <annee>2015</annee>
+    </livre>
+    <livre ISBN-13="9780262013192">
+      <titre>Probabilistic Graphical Models</titre>
+      <auteur>Daphne Koller</auteur>
+      <editeur>MIT Press</editeur>
+      <annee>2009</annee>
+    </livre>
+    <livre ISBN-13="9781783555130">
+      <titre>Python Machine Learning</titre>
+      <auteur>Sebastian Raschka</auteur>
+      <editeur>Packt Publishing</editeur>
+      <annee>2016</annee>
+    </livre>
+    <livre ISBN-13="9781491958704">
+      <titre>Test-Driven Development with Python</titre>
+      <auteur>Harry J.W. Percival</auteur>
+      <editeur>O'Reilly</editeur>
+      <annee>2017</annee>
+    </livre>
+    <livre ISBN-13="9780470497029">
+      <titre>Assembly Language Step by Step</titre>
+      <auteur>Jeff Duntemann</auteur>
+      <editeur>Wiley</editeur>
+      <annee>2009</annee>
+    </livre>
+    <livre ISBN-13="9780321940155">
+      <titre>Game Programming Algorithms and Techniques</titre>
+      <auteur>Sanjav Madhav</auteur>
+      <editeur>Addison Wesley</editeur>
+      <annee>2014</annee>
+    </livre>
+    <livre ISBN-13="9781098121952">
+      <titre>C# 10 in a Nutshell</titre>
+      <auteur>Joseph Albahari</auteur>
+      <editeur>O'Reilly</editeur>
+      <annee>2022</annee>
+    </livre>
+    <livre ISBN-13="9781492056355">
+      <titre>Fluent Python 2nd Edition</titre>
+      <auteur>Luciano Ramalho</auteur>
+      <editeur>O'Reilly</editeur>
+      <annee>2022</annee>
+    </livre>
+  </livres>
+</bibliotheque>
