@@ -18,8 +18,8 @@ namespace View
     public partial class MainWindow : Window
     {
         public static RoutedCommand ModeAdministrateur = new RoutedCommand();
-
         ViewModelBibliotheque _viewModel;
+        Livre livreSelectionne = new Livre();
 
 
         public MainWindow()
@@ -32,13 +32,7 @@ namespace View
             cmdAttenteUtilisateur.ItemsSource = _viewModel.UserActif.CommandeEnAttente;
             cmdTraiteUtilisateur.ItemsSource = _viewModel.UserActif.CommandeTraites;
             
-            
-
         }
-
-        
-
-
 
         private void Quitter_Click(object sender, RoutedEventArgs e)
         {
@@ -67,6 +61,34 @@ namespace View
             fenetreChoix.Owner = this;
             fenetreChoix.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             fenetreChoix.ShowDialog();
+            _viewModel.ChangerUserActif(_viewModel.UserSelectionne.Nom);
+        }
+
+        private void Transferer_Click(object sender, RoutedEventArgs e)
+        {
+            Utilisateurs fenetreChoix = new Utilisateurs(_viewModel);
+            fenetreChoix.Owner = this;
+            fenetreChoix.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            fenetreChoix.ShowDialog();
+
+            _viewModel.transfererLivre();
+        }
+
+        private void CommanderLivre_Click(object sender, RoutedEventArgs e)
+        {
+            CmdLivres fenetreCommander = new CmdLivres(_viewModel);
+            fenetreCommander.Owner = this;
+            fenetreCommander.WindowStartupLocation= WindowStartupLocation.CenterOwner;
+            fenetreCommander.ShowDialog();
+
+            
+        }
+
+        
+
+        private void AnnulerCommande_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.annulerCmd(ListBox.SelectedItemProperty);
         }
     }
    

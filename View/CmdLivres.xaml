@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         Title="Commande de livre" Height="300" Width="700">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:CmdLivres.ConfirmerCommand}"
+                        CanExecute="ConfirmerCommand_CanExecute"
+                        Executed="ConfirmerCommand_Executed"/>
+    </Window.CommandBindings>
     
     <Grid Background="LightPink">
         <Grid.RowDefinitions>
@@ -40,11 +46,11 @@
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Éditeur:" VerticalAlignment="Center"/>
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Année:" VerticalAlignment="Center"/>
 
-            <TextBox Grid.Row="0" Grid.Column="1" x:Name="Isbn" Margin="0,5,0,5"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="Titre" Margin="0,5,0,5"/>
-            <TextBox Grid.Row="2" Grid.Column="1" x:Name="Auteur" Margin="0,5,0,5"/>
-            <TextBox Grid.Row="3" Grid.Column="1" x:Name="Editeur" Margin="0,5,0,5"/>
-            <TextBox Grid.Row="4" Grid.Column="1" x:Name="Annee" Margin="0,5,0,5"/>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="Isbn" Margin="0,5,0,5" Text="{Binding Isbn13, Mode=TwoWay}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="Titre" Margin="0,5,0,5" Text="{Binding Titre, Mode=TwoWay}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="Auteur" Margin="0,5,0,5" Text="{Binding Auteur, Mode=TwoWay}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" x:Name="Editeur" Margin="0,5,0,5" Text="{Binding Editeur, Mode=TwoWay}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" x:Name="Annee" Margin="0,5,0,5" Text="{Binding Annee, Mode=TwoWay}"/>
         </Grid>
     
         <Button x:Name="ConfirmerCmd"
@@ -52,8 +58,8 @@
                 Content="Confirmer la commande"
                 Height="25"
                 Width="150"
-                Command=""
-                Background="Beige"/>
+                Background="Beige"
+                Command="{x:Static local:CmdLivres.ConfirmerCommand}"/>
 
     </Grid>
     

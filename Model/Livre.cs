@@ -24,6 +24,17 @@ namespace Model
             Annee = Int32.Parse(unLivre["annee"].InnerText);
         }
 
+        public Livre() 
+        {
+            Isbn13 = "";
+            Titre = "";
+            Auteur = "";
+            Editeur = "";
+            
+        }
+
+
+
         public XmlElement VersXml(XmlDocument doc)
         {
             XmlElement NouveauLivre = doc.CreateElement("livre");

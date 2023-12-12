@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +12,13 @@ namespace Model
     {
         public string DernierUser { get; set; }
         public Dictionary<string, Livre> Dictionnaire { get; set; }
-        public List<Membre> LesMembres { get; set; }
+        public ObservableCollection<Membre> LesMembres { get; set; }
 
         public Bibliotheque() 
         {
             DernierUser = string.Empty;
             Dictionnaire = new Dictionary<string, Livre>();
-            LesMembres = new List<Membre>();
+            LesMembres = new ObservableCollection<Membre>();
         }
 
         public void ChargerFichierXml(string _nomFichier)
@@ -26,6 +27,7 @@ namespace Model
             document.Load(_nomFichier);
             XmlElement racine = document.DocumentElement;
             DernierUser = racine.GetAttribute("dernierUtilisateur");
+
             XmlElement baliseLivres = racine["livres"];
             XmlNodeList lesLivres = baliseLivres.GetElementsByTagName("livre");
             foreach (XmlElement elem in lesLivres)
@@ -39,6 +41,10 @@ namespace Model
             {
                 LesMembres.Add(new Membre(elem, Dictionnaire));
             }
+
+            
+
+           
         }
 
         public void SauvegarderXml(string _nomfichier)

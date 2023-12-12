@@ -38,7 +38,7 @@
                            FontWeight="Bold"/>
                 <TextBlock  Grid.Column="1"
                             FontSize="30"
-                            Text="{Binding DernierUser}"
+                            Text="{Binding DernierUser, Mode=TwoWay}"
                             x:Name="NomUtilisateur"/>
             </Grid>
 
@@ -90,7 +90,7 @@
                                FontWeight="Bold"/>
                     <ListBox Grid.Row="1" Margin="6" Background="Bisque"
                              x:Name="livresUtilisateurs"
-                             />
+                             SelectedItem="{Binding LivreSelectionne}"/>
 
                     <StackPanel Grid.Row="2" Orientation="Horizontal" 
                                 VerticalAlignment="Top"
@@ -101,7 +101,8 @@
                                 Height="20"
                                 Command=""
                                 Background="Beige"
-                                Margin="0,0,70,0"/>
+                                Margin="0,0,70,0"
+                                Click="CommanderLivre_Click"/>
                         <Button x:Name="Transferer" 
                                 Content="Transférer livre" 
                                 Width="120"
@@ -109,6 +110,7 @@
                                 Command=""
                                 Margin="70,0,0,0"
                                 Background="Beige"
+                                Click="Transferer_Click"
                                 />
                     </StackPanel>
                 </Grid>
@@ -140,7 +142,8 @@
                         <ListBox Grid.Row="1" 
                                              Margin="6" 
                                              Background="Bisque"
-                                 x:Name="cmdAttenteUtilisateur"/>
+                                 x:Name="cmdAttenteUtilisateur"
+                                 SelectedItem="{Binding LivreSelectionne}"/>
                         <Button Grid.Row="2" 
                                 Content="Annuler la commande"
                                 x:Name="AnnulerCommande"
@@ -148,7 +151,8 @@
                                 Height="20"
                                 Command=""
                                 VerticalAlignment="Top"
-                                Background="Beige"/>
+                                Background="Beige"
+                                Click="AnnulerCommande_Click"/>
 
                     </Grid>
                 </Border>

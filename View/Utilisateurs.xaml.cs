@@ -22,25 +22,28 @@ namespace View
     public partial class Utilisateurs : Window
     {
         ViewModelBibliotheque _viewModel;
+
         public Utilisateurs(ViewModelBibliotheque _vm)
         {
             _viewModel = new ViewModelBibliotheque();
             InitializeComponent();
             _viewModel = _vm;
-
-            DataContext = _viewModel.LesMembres;
-
+            DataContext = _viewModel;
             ComboBoxUtilisateurs.ItemsSource = _viewModel.LesMembres;
-
         }
 
         private void ConfirmerChoix_Click(object sender, RoutedEventArgs e)
         {
-            
-            _viewModel.ChangerUserActif(ComboBoxUtilisateurs.SelectedItem.ToString());
+            _viewModel.UserSelectionne = ComboBoxUtilisateurs.SelectedItem as Membre;
             Close();
         }
 
-        
+        /*private void ComboBoxUtilisateurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Equipe equipe = ComboBoxEquipes.SelectedItem as Equipe;
+            //ListBoxUtilisateurs.ItemsSource = equipe.Joueurs;
+        SelectionChanged="ComboBoxUtilisateurs_SelectionChanged"
+        }
+        */
     }
 }

@@ -16,7 +16,10 @@ namespace Model
         public ObservableCollection<Livre> CommandeTraites { get; set; }
         public ObservableCollection<Livre> CommandeEnAttente { get; set; }
 
-        public Membre() { }
+        public Membre() 
+        {
+            
+        }
 
         public Membre(XmlElement unMembre, Dictionary<string, Livre> _dictionnaire)
         {
@@ -46,6 +49,7 @@ namespace Model
                     CommandeTraites.Add(_dictionnaire[commande.GetAttribute("ISBN-13")]);
                 }
             }
+
         }
 
         public XmlElement VersXml(XmlDocument doc)
@@ -57,12 +61,14 @@ namespace Model
             {
                 XmlElement unLivre = doc.CreateElement("livre");
                 unLivre.SetAttribute("ISBN-13", livre.Isbn13);
+                nouvelElement.AppendChild(unLivre);
             }
             foreach(Livre cmdAttente in CommandeEnAttente)
             {
                 XmlElement cmdAtt = doc.CreateElement("commande");
                 cmdAtt.SetAttribute("statut", "Attente");
                 cmdAtt.SetAttribute("ISBN-13", cmdAttente.Isbn13);
+                nouvelElement.AppendChild(cmdAtt);
             }
 
             foreach (Livre cmdTraite in CommandeTraites)
@@ -70,6 +76,7 @@ namespace Model
                 XmlElement cmdtermine = doc.CreateElement("commande");
                 cmdtermine.SetAttribute("statut", "Traitee");
                 cmdtermine.SetAttribute("ISBN-13", cmdTraite.Isbn13);
+                nouvelElement.AppendChild (cmdtermine);
             }
 
             return nouvelElement;

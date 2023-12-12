@@ -1,6 +1,8 @@
 ﻿using Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection.Metadata;
+using System.Xml;
 
 namespace ViewModel
 {
@@ -11,6 +13,8 @@ namespace ViewModel
         private string _nomFichier;
         private Bibliotheque _biblio;
         private Membre? _userActif;
+
+        public Livre UnLivre { get; set; }
 
         public Membre? UserActif
         {
@@ -25,7 +29,31 @@ namespace ViewModel
             }
         }
 
-        
+        private Livre _livreSelectionne;
+
+        public Livre LivreSelectionne
+        {
+            get { return _livreSelectionne; }
+            set
+            {
+                _livreSelectionne = value;
+                OnPropertyChange(nameof(LivreSelectionne));
+            }
+        }
+
+        private Membre _userSelectionne;
+
+        public Membre UserSelectionne
+        {
+            get => _userSelectionne;
+            set
+            {
+                _userSelectionne = value;
+                OnPropertyChange(nameof(UserSelectionne));
+            }
+        }
+
+
         public string DernierUser 
         { 
             get => _biblio.DernierUser;
@@ -36,7 +64,7 @@ namespace ViewModel
             }
         }
         public Dictionary<string, Livre> Dictionnaire { get => _biblio.Dictionnaire; }
-        public List<Membre> LesMembres { get => _biblio.LesMembres; }
+        public ObservableCollection<Membre> LesMembres { get => _biblio.LesMembres; }
 
         public ViewModelBibliotheque()
         {
@@ -46,6 +74,7 @@ namespace ViewModel
             _biblio.ChargerFichierXml(_nomFichier);
 
             mettreAJourUserActif();
+            UnLivre = new Livre();
 
         }
 
@@ -56,7 +85,7 @@ namespace ViewModel
                 if (membre.Nom.Equals(DernierUser))
                 {
                     _userActif = membre;
-                    //OnPropertyChange(nameof(_userActif));
+                    OnPropertyChange(nameof(_userActif));
                 }
             }
 
@@ -75,5 +104,95 @@ namespace ViewModel
             OnPropertyChange(nameof(DernierUser));
         }
 
+        public bool isbnValide()
+        {
+            bool valide = false;
+            if(UnLivre.Isbn13.Length == 13)
+            {
+                valide = true;
+            }
+            return valide;
+        }
+
+        public bool chaineValide()
+        {
+            bool valide = false;
+            if (!UnLivre.Titre.Equals("") && !UnLivre.Auteur.Equals("") && !UnLivre.Editeur.Equals(""))
+            {
+                valide = true;
+            }
+            return valide;
+        }
+
+        public bool anneeValide()
+        {
+            bool valide = false;
+            if(UnLivre.Annee >= -3000)
+            {
+                valide = true;
+            }
+
+            return valide;
+        }
+
+        public void ajouterAuxCommandes()
+        {
+            UserActif.CommandeEnAttente.Add(Dictionnaire[UnLivre.Isbn13]);
+            _biblio.SauvegarderXml(_nomFichier);
+        }
+
+        public bool existeDansLeDic()
+        {
+            bool existe = false;
+            foreach (KeyValuePair<string, Livre> livredic in Dictionnaire)
+            {
+                if (livredic.Key.Equals(UnLivre.Isbn13)){
+                    existe = true;
+                }   
+            }
+            return existe;
+        }
+
+        public bool existeDansSonCompte()
+        {
+            bool existe = false;
+            foreach(Livre livre in UserActif.mesLivres)
+            {
+                if (livre.Isbn13.Equals(UnLivre.Isbn13))
+                {
+                    existe = true;
+                }
+            }
+
+            foreach(Livre livre in UserActif.CommandeEnAttente)
+            {
+                if (livre.Isbn13.Equals(UnLivre.Isbn13))
+                {
+                    existe = true;
+                }
+            }
+
+            foreach (Livre livre in UserActif.CommandeTraites)
+            {
+                if (livre.Isbn13.Equals(UnLivre.Isbn13))
+                {
+                    existe = true;
+                }
+            }
+            return existe;
+        }
+
+        public void annulerCmd(object selectedItemProperty)
+        {
+            UserActif.CommandeEnAttente.Remove(LivreSelectionne);
+            _biblio.SauvegarderXml(_nomFichier);
+        }
+
+        public void transfererLivre()
+        {
+            UserSelectionne.mesLivres.Add(LivreSelectionne);
+            UserActif.mesLivres.Remove(LivreSelectionne);
+            _biblio.SauvegarderXml(_nomFichier);
+        }
     }
 }
