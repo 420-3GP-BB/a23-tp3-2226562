@@ -24,8 +24,29 @@ namespace Model
             Annee = Int32.Parse(unLivre["annee"].InnerText);
         }
 
+        public XmlElement VersXml(XmlDocument doc)
+        {
+            XmlElement NouveauLivre = doc.CreateElement("livre");
+            NouveauLivre.SetAttribute("ISBN-13", Isbn13);
+            XmlElement titre = doc.CreateElement("titre");
+            titre.InnerText = Titre;
+            NouveauLivre.AppendChild(titre);
+            XmlElement auteur = doc.CreateElement("auteur");
+            auteur.InnerText = Auteur;
+            NouveauLivre.AppendChild(auteur);
+            XmlElement editeur = doc.CreateElement("editeur");
+            editeur.InnerText = Editeur;
+            NouveauLivre.AppendChild(editeur);
+            XmlElement annee = doc.CreateElement("annee");
+            annee.InnerText = Annee.ToString();
+            NouveauLivre.AppendChild(annee);
 
-        public override string ToString()
+            return NouveauLivre;
+        }
+
+
+        override
+        public string ToString()
         {
             return $"{Titre}, {Auteur}, ({Annee})";
         }

@@ -21,7 +21,7 @@
             
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="600"/>
+                <RowDefinition Height="500"/>
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0"
@@ -47,13 +47,13 @@
 
         <Button DockPanel.Dock="Bottom" 
                 x:Name="Revenir" 
-                Click="Revenir_Click"
                 Content="Revenir"
                 Height="20"
                 Width="80"
                 HorizontalAlignment="Right"
                 Margin="10"
-                Background="Beige"/>
+                Background="Beige"
+                Click="Revenir_Click"/>
     </DockPanel>
     
 </Window>

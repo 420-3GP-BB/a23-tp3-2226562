@@ -26,7 +26,7 @@ namespace View
 
         private void Revenir_Click(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
     }
 }

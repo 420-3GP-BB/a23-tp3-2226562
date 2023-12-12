@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ViewModel;
 
 namespace View
 {
@@ -19,9 +21,26 @@ namespace View
     /// </summary>
     public partial class Utilisateurs : Window
     {
-        public Utilisateurs()
+        ViewModelBibliotheque _viewModel;
+        public Utilisateurs(ViewModelBibliotheque _vm)
         {
+            _viewModel = new ViewModelBibliotheque();
             InitializeComponent();
+            _viewModel = _vm;
+
+            DataContext = _viewModel.LesMembres;
+
+            ComboBoxUtilisateurs.ItemsSource = _viewModel.LesMembres;
+
         }
+
+        private void ConfirmerChoix_Click(object sender, RoutedEventArgs e)
+        {
+            
+            _viewModel.ChangerUserActif(ComboBoxUtilisateurs.SelectedItem.ToString());
+            Close();
+        }
+
+        
     }
 }

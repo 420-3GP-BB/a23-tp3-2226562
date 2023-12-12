@@ -16,10 +16,15 @@ namespace Model
         public ObservableCollection<Livre> CommandeTraites { get; set; }
         public ObservableCollection<Livre> CommandeEnAttente { get; set; }
 
+        public Membre() { }
+
         public Membre(XmlElement unMembre, Dictionary<string, Livre> _dictionnaire)
         {
             Nom = unMembre.GetAttribute("nom");
             Administrateur = bool.Parse(unMembre.GetAttribute("administrateur"));
+            mesLivres = new ObservableCollection<Livre>();
+            CommandeTraites = new ObservableCollection<Livre>();
+            CommandeEnAttente = new ObservableCollection<Livre>();
 
             XmlNodeList livres = unMembre.GetElementsByTagName("livre");
 
@@ -41,6 +46,39 @@ namespace Model
                     CommandeTraites.Add(_dictionnaire[commande.GetAttribute("ISBN-13")]);
                 }
             }
+        }
+
+        public XmlElement VersXml(XmlDocument doc)
+        {
+            XmlElement nouvelElement = doc.CreateElement("membre");
+            nouvelElement.SetAttribute("nom", Nom);
+            nouvelElement.SetAttribute("administrateur", Administrateur.ToString());
+            foreach(Livre livre in mesLivres)
+            {
+                XmlElement unLivre = doc.CreateElement("livre");
+                unLivre.SetAttribute("ISBN-13", livre.Isbn13);
+            }
+            foreach(Livre cmdAttente in CommandeEnAttente)
+            {
+                XmlElement cmdAtt = doc.CreateElement("commande");
+                cmdAtt.SetAttribute("statut", "Attente");
+                cmdAtt.SetAttribute("ISBN-13", cmdAttente.Isbn13);
+            }
+
+            foreach (Livre cmdTraite in CommandeTraites)
+            {
+                XmlElement cmdtermine = doc.CreateElement("commande");
+                cmdtermine.SetAttribute("statut", "Traitee");
+                cmdtermine.SetAttribute("ISBN-13", cmdTraite.Isbn13);
+            }
+
+            return nouvelElement;
+        }
+
+        override
+        public string ToString()
+        {
+            return Nom;
         }
 
 

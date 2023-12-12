@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="Choix utilisateur" Height="90" Width="200">
+        Title="Choix utilisateur" Height="150" Width="300">
     <Grid Background="LightPink">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="Choisissez un utilisateur"
@@ -25,8 +25,11 @@
 
             <TextBlock Text="Utilisateur:"
                        FontSize="10"
-                       Grid.Column="0"/>
-            <ComboBox Grid.Column="1" Background="Beige"/>
+                       Grid.Column="0"
+                       VerticalAlignment="Center"/>
+            <ComboBox Grid.Column="1" Background="Beige"
+                      x:Name="ComboBoxUtilisateurs"
+                      />
         </Grid>
 
         <Button Grid.Row="2"
@@ -34,9 +37,10 @@
                 Content="Confirmer"
                 VerticalAlignment="Top"
                 FontSize="10"
-                Height="15"
+                Height="25"
                 Width="50"
-                Background="Beige"/>
+                Background="Beige"
+                Click="ConfirmerChoix_Click"/>
     </Grid>
 
     

@@ -9,7 +9,14 @@
         Height="720" 
         Width="1280"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        >
+
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.ModeAdministrateur}"
+                        CanExecute="ModeAdministrateur_CanExecute"
+                        Executed="ModeAdministrateur_Executed"/>
+    </Window.CommandBindings>
     
     <DockPanel Background="LightPink">
         <Grid DockPanel.Dock="Top">
@@ -30,8 +37,9 @@
                            FontSize="30"
                            FontWeight="Bold"/>
                 <TextBlock  Grid.Column="1"
-                            Text="Bonemine"
-                            FontSize="30"/>
+                            FontSize="30"
+                            Text="{Binding DernierUser}"
+                            x:Name="NomUtilisateur"/>
             </Grid>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
@@ -41,19 +49,21 @@
                         Height="20"
                         Command=""
                         Margin="0,0,20,0"
-                        Background="Beige"/>
+                        Background="Beige"
+                        Click="ChangerUser_Click"/>
                 <Button x:Name="ModeAdmin" 
                         Content="Mode administrateur" 
-                        Command=""
                         Width="120"
                         Height="20"
                         Margin="0,0,20,0"
-                        Background="Beige"/>
+                        Background="Beige"
+                        Command="{x:Static local:MainWindow.ModeAdministrateur}"/>
                 <Button x:Name="Quitter" 
                         Content="Quitter" 
                         Width="120"
                         Height="20"
-                        Background="Beige"/>
+                        Background="Beige"
+                        Click="Quitter_Click"/>
             </StackPanel>
         </Grid>
 
@@ -78,7 +88,9 @@
                                HorizontalAlignment="Center"
                                FontSize="25"
                                FontWeight="Bold"/>
-                    <ListBox Grid.Row="1" Margin="6" Background="Bisque"/>
+                    <ListBox Grid.Row="1" Margin="6" Background="Bisque"
+                             x:Name="livresUtilisateurs"
+                             />
 
                     <StackPanel Grid.Row="2" Orientation="Horizontal" 
                                 VerticalAlignment="Top"
@@ -127,7 +139,8 @@
                                                />
                         <ListBox Grid.Row="1" 
                                              Margin="6" 
-                                             Background="Bisque"/>
+                                             Background="Bisque"
+                                 x:Name="cmdAttenteUtilisateur"/>
                         <Button Grid.Row="2" 
                                 Content="Annuler la commande"
                                 x:Name="AnnulerCommande"
@@ -157,7 +170,8 @@
                                                FontWeight="Bold"/>
                         <ListBox Grid.Row="1" 
                                              Margin="6" 
-                                             Background="Bisque"/>
+                                             Background="Bisque"
+                                 x:Name="cmdTraiteUtilisateur"/>
                     </Grid>
                 </Border>
             </Grid>
