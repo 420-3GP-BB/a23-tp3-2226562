@@ -1,6 +1,7 @@
 ﻿using Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Xml;
 
@@ -13,6 +14,9 @@ namespace ViewModel
         private string _nomFichier;
         private Bibliotheque _biblio;
         private Membre? _userActif;
+        private Livre _livreSelectionne;
+        private Membre _userSelectionne;
+        private Commande _commandeSelectionnee;
 
         public Livre UnLivre { get; set; }
 
@@ -29,7 +33,7 @@ namespace ViewModel
             }
         }
 
-        private Livre _livreSelectionne;
+        
 
         public Livre LivreSelectionne
         {
@@ -41,7 +45,17 @@ namespace ViewModel
             }
         }
 
-        private Membre _userSelectionne;
+        public Commande CommandeSelectionnee
+        {
+            get { return _commandeSelectionnee; }
+            set
+            {
+                _commandeSelectionnee = value;
+                OnPropertyChange(nameof(_commandeSelectionnee));
+            }
+        }
+
+
 
         public Membre UserSelectionne
         {
@@ -65,6 +79,9 @@ namespace ViewModel
         }
         public Dictionary<string, Livre> Dictionnaire { get => _biblio.Dictionnaire; }
         public ObservableCollection<Membre> LesMembres { get => _biblio.LesMembres; }
+        public ObservableCollection<Commande> LesCommandesEnAttente { get => _biblio.TousCommandesEnAttente; }
+        public ObservableCollection<Commande> LesCommandesTraites { get => _biblio.TousCommandesTraites; }
+
 
         public ViewModelBibliotheque()
         {
@@ -138,6 +155,7 @@ namespace ViewModel
         public void ajouterAuxCommandes()
         {
             UserActif.CommandeEnAttente.Add(Dictionnaire[UnLivre.Isbn13]);
+            _biblio.remplirTousCmdEnAttente();
             _biblio.SauvegarderXml(_nomFichier);
         }
 
@@ -185,6 +203,7 @@ namespace ViewModel
         public void annulerCmd(object selectedItemProperty)
         {
             UserActif.CommandeEnAttente.Remove(LivreSelectionne);
+            _biblio.remplirTousCmdEnAttente();
             _biblio.SauvegarderXml(_nomFichier);
         }
 
@@ -193,6 +212,23 @@ namespace ViewModel
             UserSelectionne.mesLivres.Add(LivreSelectionne);
             UserActif.mesLivres.Remove(LivreSelectionne);
             _biblio.SauvegarderXml(_nomFichier);
+        }
+
+        public void attenteVersTraite()
+        {
+            UserSelectionne.CommandeTraites.Add(LivreSelectionne);
+            UserSelectionne.CommandeEnAttente.Remove(LivreSelectionne);
+            _biblio.SauvegarderXml(_nomFichier);
+            _biblio.remplirTousCmdEnAttente();
+            _biblio.remplirTousCmdTraites();
+        }
+
+        public void traiteVersLivres()
+        {
+            UserSelectionne.CommandeTraites.Remove(LivreSelectionne);
+            UserSelectionne.mesLivres.Add(LivreSelectionne);
+            _biblio.SauvegarderXml(_nomFichier);
+            _biblio.remplirTousCmdTraites();
         }
     }
 }

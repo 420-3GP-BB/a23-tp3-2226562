@@ -71,13 +71,17 @@ namespace Model
                 nouvelElement.AppendChild(cmdAtt);
             }
 
-            foreach (Livre cmdTraite in CommandeTraites)
+            if(CommandeTraites.Count > 0) 
             {
-                XmlElement cmdtermine = doc.CreateElement("commande");
-                cmdtermine.SetAttribute("statut", "Traitee");
-                cmdtermine.SetAttribute("ISBN-13", cmdTraite.Isbn13);
-                nouvelElement.AppendChild (cmdtermine);
+                foreach (Livre cmdTraite in CommandeTraites)
+                {
+                    XmlElement cmdtermine = doc.CreateElement("commande");
+                    cmdtermine.SetAttribute("statut", "Traitee");
+                    cmdtermine.SetAttribute("ISBN-13", cmdTraite.Isbn13);
+                    nouvelElement.AppendChild(cmdtermine);
+                }
             }
+            
 
             return nouvelElement;
         }

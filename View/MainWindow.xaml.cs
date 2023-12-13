@@ -49,7 +49,7 @@ namespace View
 
         private void ModeAdministrateur_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Admin fenetreAdmin = new Admin();
+            Admin fenetreAdmin = new Admin(_viewModel);
             fenetreAdmin.Owner = this;
             fenetreAdmin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             fenetreAdmin.ShowDialog();
@@ -62,6 +62,10 @@ namespace View
             fenetreChoix.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             fenetreChoix.ShowDialog();
             _viewModel.ChangerUserActif(_viewModel.UserSelectionne.Nom);
+            DataContext = _viewModel;
+            livresUtilisateurs.ItemsSource = _viewModel.UserActif.mesLivres;
+            cmdAttenteUtilisateur.ItemsSource = _viewModel.UserActif.CommandeEnAttente;
+            cmdTraiteUtilisateur.ItemsSource = _viewModel.UserActif.CommandeTraites;
         }
 
         private void Transferer_Click(object sender, RoutedEventArgs e)
@@ -80,11 +84,7 @@ namespace View
             fenetreCommander.Owner = this;
             fenetreCommander.WindowStartupLocation= WindowStartupLocation.CenterOwner;
             fenetreCommander.ShowDialog();
-
-            
         }
-
-        
 
         private void AnnulerCommande_Click(object sender, RoutedEventArgs e)
         {

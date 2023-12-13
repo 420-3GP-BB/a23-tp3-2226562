@@ -14,11 +14,18 @@ namespace Model
         public Dictionary<string, Livre> Dictionnaire { get; set; }
         public ObservableCollection<Membre> LesMembres { get; set; }
 
+        public ObservableCollection<Commande> TousCommandesEnAttente { get; set; }
+        public ObservableCollection<Commande> TousCommandesTraites { get; set; }
+
         public Bibliotheque() 
         {
             DernierUser = string.Empty;
             Dictionnaire = new Dictionary<string, Livre>();
             LesMembres = new ObservableCollection<Membre>();
+            TousCommandesEnAttente = new ObservableCollection<Commande>();
+            TousCommandesTraites = new ObservableCollection<Commande>();
+
+
         }
 
         public void ChargerFichierXml(string _nomFichier)
@@ -42,9 +49,37 @@ namespace Model
                 LesMembres.Add(new Membre(elem, Dictionnaire));
             }
 
+            remplirTousCmdEnAttente();
+            remplirTousCmdTraites();
             
 
            
+        }
+
+        public void remplirTousCmdEnAttente()
+        {
+            TousCommandesEnAttente.Clear();
+            foreach(Membre mem in LesMembres)
+            {
+                foreach(Livre livre in mem.CommandeEnAttente)
+                {
+                    TousCommandesEnAttente.Add(new Commande(mem, livre, "Attente"));
+                }
+                
+            }
+        }
+
+        public void remplirTousCmdTraites()
+        {
+            TousCommandesTraites.Clear();
+            foreach (Membre mem in LesMembres)
+            {
+                foreach (Livre livre in mem.CommandeTraites)
+                {
+                    TousCommandesTraites.Add(new Commande(mem, livre, "Traitee"));
+                }
+
+            }
         }
 
         public void SauvegarderXml(string _nomfichier)

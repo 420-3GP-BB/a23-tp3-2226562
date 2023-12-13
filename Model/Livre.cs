@@ -30,7 +30,6 @@ namespace Model
             Titre = "";
             Auteur = "";
             Editeur = "";
-            
         }
 
 
